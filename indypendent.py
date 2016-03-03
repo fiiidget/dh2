@@ -24,4 +24,4 @@ soup = BeautifulSoup(issue_html, "html.parser")
 article_box = soup.find_all("div", attrs = {"class": "ds-2col-stacked node node-issue node-promoted view-mode-full clearfix"})
 
 for a_box in article_box:
-    uprint(a_box.text)
+    uprint(a_box.text])
