@@ -32,9 +32,9 @@ for a_box in article_box:
 
     # for an_article in article_links:
     #     uprint(an_article['href'])
-
     for an_article in article_links:
         a_link = an_article.find_all("a")
-        uprint(a_link["href"])
+        for link in a_link:
+            print(link["href"])
 
         #
