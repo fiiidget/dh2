@@ -13,6 +13,8 @@ def uprint(*objects, sep=' ', end='\n', file=sys.stdout):
         f = lambda obj: str(obj).encode(enc, errors='backslashreplace').decode(enc)
         print(*map(f, objects), sep=sep, end=end, file=file)
 
+linkurl = []
+
 url = ("https://indypendent.org/node/63") #replace node number with each number in the range of issues that we want to scrape
 issue_page = requests.get(url)
 if issue_page.status_code != 200:
@@ -35,6 +37,14 @@ for a_box in article_box:
     for an_article in article_links:
         a_link = an_article.find_all("a")
         for link in a_link:
-            print(link["href"])
+            linkurl.append(link["href"])
 
-        #
+# uprint(linkurl)
+# with open("indylinks.csv", "wb") as indyfile:
+#     # indyfile.write()
+# # file = open("indylinks.csv",'wb')
+#
+#     wr = csv.writer(indyfile)
+#
+#     for item in linkurl:
+#         wr.writerow(item)
