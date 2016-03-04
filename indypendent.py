@@ -19,7 +19,7 @@ ids = range(172, 204, 1)
 for x in ids:
     url = ('https://indypendent.org/issue/'+str(x))
 # The only problem here is that issue 175 for some reason has the url 175-0,
-# and if we could get that in here, it would be an even 100 articles.
+# and if we could get that in here, it would be complete from 2013 thru 1st of 2015.
 # Think about how to do this.
 
     issue_page = requests.get(url)
@@ -44,8 +44,8 @@ for x in ids:
                 for thing in a_link:
                     linkurl.append(thing["href"])
 
-uprint(linkurl)
-uprint(len(linkurl))
+# uprint(linkurl)
+# uprint(len(linkurl))
 # with open("indylinks.csv", "wb") as indyfile:
 #     # indyfile.write()
 # # file = open("indylinks.csv",'wb')
@@ -55,4 +55,19 @@ uprint(len(linkurl))
 #     for item in linkurl:
 #         wr.writerow(item)
 
-# for page in linkurl:
+for page in linkurl:
+    url = ("https://indypendent.org/"+str(page))
+
+    article_page = requests.get(url)
+    if issue_page.status_code != 200:
+        uprint ("uh, oops? that's a broken page", url)
+
+    article_html = article_page.text
+
+    soup = BeautifulSoup(article_html, "html.parser")
+
+    article_text = soup.find_all("div", attrs = {"class" : "even"})
+    for article in article_text:
+        with open ('article.txt', "w") as file:
+            file = write(article.text)
+# this just does one file for now I think. Work on writing ot individual txt files. kthx
