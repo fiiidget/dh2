@@ -68,6 +68,8 @@ for page in linkurl:
 
     article_text = soup.find_all("div", attrs = {"class" : "even"})
     for article in article_text:
-        with open ('article.txt', "w") as file:
-            file = write(article.text)
+        articletxt = article.text
+        #articletxt.encode('utf-8')
+        with open ('articles.csv', "a") as file:
+            file.write(str(articletxt.encode('utf-8', 'ignore')))
 # this just does one file for now I think. Work on writing ot individual txt files. kthx
