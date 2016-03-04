@@ -15,31 +15,34 @@ def uprint(*objects, sep=' ', end='\n', file=sys.stdout):
 
 linkurl = []
 
-url = ("https://indypendent.org/node/63") #replace node number with each number in the range of issues that we want to scrape
-issue_page = requests.get(url)
-if issue_page.status_code != 200:
-    uprint ("uh, oops? that's a broken page")
+ids = [63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 144, 182, 183, 184, 185, 186, 187, 188, 189, 190, 1919, 192, 193, 194, 195, 196, 197]
+for x in ids:
+    url = ('https://indypendent.org/node/'+str(x))
 
-issue_html = issue_page.text
+    issue_page = requests.get(url)
+    if issue_page.status_code != 200:
+        uprint ("uh, oops? that's a broken page")
 
-soup = BeautifulSoup(issue_html, "html.parser")
+    issue_html = issue_page.text
 
-article_box = soup.find_all("div", attrs = {"class": "ds-2col-stacked node node-issue node-promoted view-mode-full clearfix"})
+    soup = BeautifulSoup(issue_html, "html.parser")
 
-# for a_box in article_box:
-#     uprint(a_box.text)
+    article_box = soup.find_all("div", attrs = {"class": "view view-issue-articles view-id-issue_articles view-display-id-entity_view_3 issue-section-national view-dom-id-3"})
 
-for a_box in article_box:
-    article_links = a_box.find_all("div", attrs = {"class": "view-content"})
+    # for a_box in article_box:
+    #     uprint(a_box.text)
 
-    # for an_article in article_links:
-    #     uprint(an_article['href'])
-    for an_article in article_links:
-        a_link = an_article.find_all("a")
-        for link in a_link:
-            linkurl.append(link["href"])
+    for a_box in article_box:
+        article_links = a_box.find_all("div", attrs = {"class": "view-content"})
+        for an_article in article_links:
+            links = an_article.find_all("div", attrs = {"class": "views-field views-field-title"})
+            for link in links:
+                a_link = link.find_all("a")
+                for thing in a_link:
+                    linkurl.append(thing["href"])
 
 # uprint(linkurl)
+uprint(len(linkurl))
 # with open("indylinks.csv", "wb") as indyfile:
 #     # indyfile.write()
 # # file = open("indylinks.csv",'wb')
