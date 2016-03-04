@@ -15,13 +15,16 @@ def uprint(*objects, sep=' ', end='\n', file=sys.stdout):
 
 linkurl = []
 
-ids = [63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 144, 182, 183, 184, 185, 186, 187, 188, 189, 190, 1919, 192, 193, 194, 195, 196, 197]
+ids = range(172, 204, 1)
 for x in ids:
-    url = ('https://indypendent.org/node/'+str(x))
+    url = ('https://indypendent.org/issue/'+str(x))
+# The only problem here is that issue 175 for some reason has the url 175-0,
+# and if we could get that in here, it would be an even 100 articles.
+# Think about how to do this.
 
     issue_page = requests.get(url)
     if issue_page.status_code != 200:
-        uprint ("uh, oops? that's a broken page")
+        uprint ("uh, oops? that's a broken page", url)
 
     issue_html = issue_page.text
 
@@ -41,7 +44,7 @@ for x in ids:
                 for thing in a_link:
                     linkurl.append(thing["href"])
 
-# uprint(linkurl)
+uprint(linkurl)
 uprint(len(linkurl))
 # with open("indylinks.csv", "wb") as indyfile:
 #     # indyfile.write()
@@ -51,3 +54,5 @@ uprint(len(linkurl))
 #
 #     for item in linkurl:
 #         wr.writerow(item)
+
+# for page in linkurl:
