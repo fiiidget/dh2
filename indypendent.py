@@ -55,6 +55,8 @@ for x in ids:
 #     for item in linkurl:
 #         wr.writerow(item)
 
+articles_list = []
+
 for page in linkurl:
     url = ("https://indypendent.org/"+str(page))
 
@@ -68,8 +70,11 @@ for page in linkurl:
 
     article_text = soup.find_all("div", attrs = {"class" : "even"})
     for article in article_text:
-        # articletxt = article.text
-        # #articletxt.encode('utf-8')
-        with open ('articles.csv', "a") as file:
-            file.write(str((article.text).encode("utf-8", "ignore")))
-# this just does one file for now I think. Work on writing ot individual txt files. kthx
+        articles_list.append((article.text).encode("utf-8", "ignore"))
+
+# uprint(articles_list)
+article_files = open("articles.csv", "w")
+
+wr = csv.writer(article_files)
+
+wr.writerow(articles_list)
