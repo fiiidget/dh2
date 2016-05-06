@@ -1,15 +1,8 @@
-# find the directory
-# create a new file with the filename you're using and +New or something
-# write {"doc": to that file
-# append the regular document text to that file
-# append } to the end
-# profit.
-
 import os
 import glob
 import sys
 import re
-folders = ["api_BerkeleyBarb", "api_FOXNews", "api_Indypendent", "api_MainstreamMedia", "api_PopCulture"]
+folders = ["api_Congress_A-D", "api_BerkeleyBarb", "api_FOXNews", "api_Indypendent", "api_MainstreamMedia", "api_PopCulture"]
 filetext = []
 
 for item in folders:
@@ -26,9 +19,5 @@ for item in folders:
 
             file = open(indir+"\\"+"new_"+str(item)+"\\"+str(g), "a", encoding = "utf-8")
             file.write("{\"doc\": ")
-
-
-
-
             file.write(filetext)
             file.write("}")
