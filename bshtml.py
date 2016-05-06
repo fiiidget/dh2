@@ -15,7 +15,7 @@ def uprint(*objects, sep=' ', end='\n', file=sys.stdout):
         f = lambda obj: str(obj).encode(enc, errors='backslashreplace').decode(enc)
         print(*map(f, objects), sep=sep, end=end, file=file)
 
-subject_terms = ["Espionage", "Police", "Privacy", "Reconnaissance", "security", "Snowden", "spy", "surveillance"]
+subject_terms = ["Drone", "Whistleblow", "Wiretap"]
 
 article_list = []
 article_names = []
