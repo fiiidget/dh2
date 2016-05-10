@@ -2,7 +2,7 @@ import os
 import glob
 import sys
 import re
-folders = ["api_Congress_Women", "api_Congress_A-D", "api_BerkeleyBarb", "api_FOXNews", "api_Indypendent", "api_MainstreamMedia", "api_PopCulture"]
+folders = ["api_Congress_2001", "api_Congress_2002", "api_Congress_2012", "api_Congress_2013", "api_Congress_2014", "api_Congress_2000", "api_Congress_Women", "api_Congress_A-D", "api_BerkeleyBarb", "api_FOXNews", "api_Indypendent", "api_MainstreamMedia", "api_PopCulture"]
 filetext = []
 
 for item in folders:
